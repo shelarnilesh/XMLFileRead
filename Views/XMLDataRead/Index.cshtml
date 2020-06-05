@@ -1,0 +1,33 @@
+﻿@model XMLReadData.Models.XMLData
+    @using XMLReadData.Models;
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+
+@using (Html.BeginForm("XMLDataProcess", "XMLDataRead", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+
+    <div class="container" style="margin-top:30px">
+        
+        <div class="form-group">
+
+            @Html.DropDownListFor(m => m.operation,
+                                new SelectList(Enum.GetValues(typeof(Operation))),
+                                "Select Process")
+        </div>
+        <div class="form-group">
+            @Html.TextAreaFor(m => m.XMLDataString, new { @class = "form-control" });
+            
+        </div>
+        <div class="form-group">
+            <input type="submit" name="submit" id="submit" value="Process Data" class="form-control btn-success" />
+        </div>
+        <div class="form-group">@ViewBag.Message</div>
+        <div class="form-group text-danger">@ViewBag.Error</div>
+
+    </div>
+}
